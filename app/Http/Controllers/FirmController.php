@@ -51,30 +51,44 @@ class FirmController extends BaseController
      }
 
       else{
-         echo 'You are not registered, som';
+         echo 'You are not registered,';
       }
 
 }
 
-public function log(Request $request, LoginRequest $req){
+public function log(Request $request){
 
     $firm=new Firm();
     $registred=new Registred();
-    $password=$req->get('password');
-    $mail=$request->get('mail');
-    $firm->mail=$request->get('mail');
-    $registred->password=$request->get('password');
+    //$password=$req->get('password');
+   // $mail=$request->get('mail');
+    $registred->email=$request->get('mail');
 
+    $registred->passwordlog=sha1($request->get('password'));
+   // dd($request->get('mail'));
+   // dd(sha1($request->get('password')));
 
-    $result= $firm->join('registreds', 'firms.id', '=', 'registreds.idfirm')->where(['password'=>sha1($password),'mail'=>$mail] )->get();
+     $result=$registred->login();
+   // $result= $firm->join('firms', 'firms.id', '=', 'registreds.idfirm')->where(['password'=>sha1($password),'mail'=>$mail] )->get();
   // dd($result);
     //dd(sha1($password));
    // $result=Status::find(2)->invoice->where('invTax', 5);
-   // dd($result);
+  // dd($result);
     $res=$result->count();
+    //dd($res);
 
-   if($res==1){
+   if($res){
+       $request->session()->put('user', $result);
        return redirect()->route('profile');
+    }
+   else {
+       return redirect()->back()->with("warning", "Wrong username or password.");
+   }
+
+    public function logout()
+    {
+        session()->forget('user');
+        return redirect(route("login"));
     }
 
 

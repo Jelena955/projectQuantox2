@@ -15,4 +15,6 @@ class Firm extends Model
     {
         return $this->hasOne(Registred::class, 'idfirm');
     }
+
+
 }
