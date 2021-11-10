@@ -30,6 +30,7 @@ Route::get('/user/profile', [FirmController::class, 'user'])->name('profile');
 Route::get('/user/clients', [ClientsController::class, 'clients'])->name('clients');
 Route::get('/user/clients', [ClientsController::class, 'show'])->name('clients');
 Route::get('/user/clients/add', [ClientsController::class, 'addclient'])->name('addclients');
+Route::post('/add', [ClientsController::class, 'store'])->name('addclients');
 
 //});
 

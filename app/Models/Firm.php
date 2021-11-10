@@ -10,7 +10,7 @@ class Firm extends Model
     use HasFactory;
     protected $table='firms';
     public $email;
-    public $id;
+    public $idf;
 
     public function registred()
     {
@@ -23,7 +23,7 @@ class Firm extends Model
     }
 
     public function show(){
-     return  $this->all()->where('id', $this->id );
+     return  $this->all()->where('id', $this->idf );
     }
 
 

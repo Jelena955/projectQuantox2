@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\RegisterRequest;
 use App\Http\Request\LoginRequest;
+use App\Models\Client;
 use App\Models\Firm;
 use App\Models\Registred;
 use App\Models\Status;
@@ -23,10 +24,15 @@ class FirmController extends BaseController
         $accountnumber = $request->input('accountnumber');
         $street = $request->input('street');
         $city = $request->input('city');
-        $password = $request->input('password');
-        $password_confirmation = $request->input('password_confirmation');
-        $field=$request->input('FieldsetCheck');
-       // dd(sha1($password));
+        //dd(session('user'));
+       if(!session()->has('user')){
+            $password = $request->input('password');
+            $password_confirmation = $request->input('password_confirmation');
+            $field=$request->input('FieldsetCheck');
+            // dd(sha1($password));
+
+        }
+
 
 
        $firm=new Firm();
@@ -38,12 +44,18 @@ class FirmController extends BaseController
         $firm->adress=$street.' '.$city;
         $firm->name=$name;
         $firm->save();
-        $firmid=$firm->id;
-        $registred=new Registred();
-        $registred->idfirm=$firmid;
-        $registred->password=sha1($password);
-        $registred->active=1;
-        $registred->save();
+        //$firmid=$firm->id;
+       // dd($firmid);
+        if(session()->has('user')){
+            $registred=new Registred();
+            $registred->idfirm=$firm->id;
+            $registred->password=sha1($password);
+            $registred->active=1;
+            $registred->save();
+
+
+        }
+
 
      if($firm->save()&&$registred->save()){
 
@@ -61,23 +73,10 @@ public function log(Request $request)
 
     $firm = new Firm();
     $registred = new Registred();
-    //$password=$req->get('password');
-    // $mail=$request->get('mail');
     $registred->email = $request->get('mail');
-
     $registred->passwordlog = sha1($request->get('password'));
-    // dd($request->get('mail'));
-    // dd(sha1($request->get('password')));
-
     $result = $registred->login();
-    // $result= $firm->join('firms', 'firms.id', '=', 'registreds.idfirm')->where(['password'=>sha1($password),'mail'=>$mail] )->get();
-    // dd($result);
-    //dd(sha1($password));
-    // $result=Status::find(2)->invoice->where('invTax', 5);
-    // dd($result);
     $res = $result->count();
-    //dd($res);
-
     if ($res) {
         $request->session()->put('user', $result);
         return redirect()->route('profile');
@@ -94,8 +93,6 @@ public function log(Request $request)
     }
 
 public function user(){
-        $menu=$this->data;
-       // dd($menu);
         return view('pages.user.profile', $this->data);
 }
 
