@@ -2,11 +2,23 @@
 <html lang="en">
 
 
-
 <body>
 
+
+
 <!-- Navigation -->
-@include('fixed.navigation')
+@if(Request::route()->getName()!='home' && Request::route()->getName()!='login' && Request::route()->getName()!='register')
+
+@include('fixed.navigationforuser')
+
+
+
+@else
+    @include('fixed.navigation')
+
+@endif
+
+
 
 <!-- Page Content -->
 @yield('content')

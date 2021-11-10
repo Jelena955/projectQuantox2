@@ -18,9 +18,9 @@
 </head>
 @extends('layouts.layout')
 
-@section('title') Products @endsection
-@section('description') Browse all of our products. @endsection
-@section('keywords') shop, online, products @endsection
+@section('title')Register @endsection
+@section('description') Register @endsection
+@section('keywords') invoices, invoice, register, mail, password, name @endsection
 
 @section('content')
 

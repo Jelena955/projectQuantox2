@@ -17,9 +17,9 @@
 </head>
 @extends('layouts.layout')
 
-@section('title') Products @endsection
-@section('description') Browse all of our products. @endsection
-@section('keywords') shop, online, products @endsection
+@section('title') Log in @endsection
+@section('description') Log in @endsection
+@section('keywords')log in, mail, password, invoice @endsection
 
 @section('content')
     <div class="container" style="margin-top: 25px">

@@ -17,11 +17,14 @@
 </head>
 @extends('layouts.layout')
 
-@section('title') Products @endsection
-@section('description') Browse all of our products. @endsection
-@section('keywords') shop, online, products @endsection
+@section('title') Profile @endsection
+@section('description') Your profile @endsection
+@section('keywords') invoices, profile, clients, invoice, firm @endsection
 
 @section('content')
+
+
+
 
 
     @endsection

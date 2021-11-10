@@ -56,34 +56,36 @@ class FirmController extends BaseController
 
 }
 
-public function log(Request $request){
+public function log(Request $request)
+{
 
-    $firm=new Firm();
-    $registred=new Registred();
+    $firm = new Firm();
+    $registred = new Registred();
     //$password=$req->get('password');
-   // $mail=$request->get('mail');
-    $registred->email=$request->get('mail');
+    // $mail=$request->get('mail');
+    $registred->email = $request->get('mail');
 
-    $registred->passwordlog=sha1($request->get('password'));
-   // dd($request->get('mail'));
-   // dd(sha1($request->get('password')));
+    $registred->passwordlog = sha1($request->get('password'));
+    // dd($request->get('mail'));
+    // dd(sha1($request->get('password')));
 
-     $result=$registred->login();
-   // $result= $firm->join('firms', 'firms.id', '=', 'registreds.idfirm')->where(['password'=>sha1($password),'mail'=>$mail] )->get();
-  // dd($result);
+    $result = $registred->login();
+    // $result= $firm->join('firms', 'firms.id', '=', 'registreds.idfirm')->where(['password'=>sha1($password),'mail'=>$mail] )->get();
+    // dd($result);
     //dd(sha1($password));
-   // $result=Status::find(2)->invoice->where('invTax', 5);
-  // dd($result);
-    $res=$result->count();
+    // $result=Status::find(2)->invoice->where('invTax', 5);
+    // dd($result);
+    $res = $result->count();
     //dd($res);
 
-   if($res){
-       $request->session()->put('user', $result);
-       return redirect()->route('profile');
+    if ($res) {
+        $request->session()->put('user', $result);
+        return redirect()->route('profile');
+    } else {
+        return redirect()->back()->with("warning", "Wrong username or password.");
     }
-   else {
-       return redirect()->back()->with("warning", "Wrong username or password.");
-   }
+
+}
 
     public function logout()
     {
@@ -91,11 +93,15 @@ public function log(Request $request){
         return redirect(route("login"));
     }
 
-
-
-
-
+public function user(){
+        $menu=$this->data;
+       // dd($menu);
+        return view('pages.user.profile', $this->data);
 }
+
+
+
+
 
 
 }
