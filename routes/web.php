@@ -20,13 +20,13 @@ use \App\Http\Controllers\ProbaController;
 Route::get('/', [CitiesController::class, 'index'])->name('home');
 Route::post('/', [CitiesController::class, 'index'])->name('home');
 Route::get('/reg', [CitiesController::class, 'index'])->name('register');
-Route::post('/logg', [FirmController::class, 'log'])->name('home');
+Route::post('/logg', [FirmController::class, 'log'])->name('homee');
 Route::post('/register', [FirmController::class, 'store'])->name('register');
 Route::get('/login', function (){
    return view('pages.login');
 })->name('login');
 
-//Route::group(['middleware' => 'user'], function() {
+Route::group(['middleware' => 'user'], function() {
 Route::get('/user/profile', [FirmController::class, 'user'])->name('profile');
 Route::get('/user/clients', [ClientsController::class, 'clients'])->name('clients');
 Route::get('/user/clients', [ClientsController::class, 'show'])->name('clientsshow');
@@ -34,6 +34,7 @@ Route::get('/user/clients/add', [ClientsController::class, 'addclient'])->name('
 Route::post('/user/clients/do-add', [ClientsController::class, 'store'])->name('doaddclients');
 Route::get("/user/clients/{id}/delete", [ClientsController::class, 'destroy'])->name("user.clients.delete");
 Route::post("/user/clients/{id}/update", [FirmController::class, 'update'])->name("user.clients.update");
-//});
+Route::get("/user/profile/logout", [FirmController::class, 'logout'])->name("logout");
+});
 
 

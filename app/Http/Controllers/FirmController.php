@@ -32,8 +32,6 @@ class FirmController extends BaseController
             $password = $request->input('password');
             $password_confirmation = $request->input('password_confirmation');
             $field=$request->input('FieldsetCheck');
-            // dd(sha1($password));
-
         }
 
 
@@ -47,8 +45,6 @@ class FirmController extends BaseController
         $firm->adress=$street.' '.$city;
         $firm->name=$name;
         $firm->save();
-        //$firmid=$firm->id;
-       // dd($firmid);
         if(session()->has('user')){
             $registred=new Registred();
             $registred->idfirm=$firm->id;
@@ -90,7 +86,7 @@ public function log(Request $request)
     public function logout()
     {
         session()->forget('user');
-        return redirect(route("login"));
+        return redirect(route("home"));
     }
 
 public function user(){
@@ -98,17 +94,6 @@ public function user(){
 }
 
     public function update(Request  $request, $id){
-       /* $rules = [
-            "mail" => "required|email",
-            "name" => "required|min:4|max:20",
-            "pib" => "required|min:9|max:9",
-            "idnumber" => "required|min:8|max:8",
-            "accountnumber" => "required|min:8|max:12",
-
-            "street" => 'required'
-        ];
-         $validator = \Validator::make($request->all(), $rules);
-         $validator->validate();*/
 
         $validator = Validator::make($request->all(), [
             "mail" => "required|email",
@@ -125,15 +110,7 @@ public function user(){
                 ->withErrors($validator)
                 ->withInput();
         }
-
-        // Retrieve the validated input...
         $validated = $validator->validated();
-
-
-
-       // $request->all();
-        // dd($request->input('mail'));
-
         $mail = $request->get('mail');
         $name = $request->input('name');
         $pib = $request->input('pib');

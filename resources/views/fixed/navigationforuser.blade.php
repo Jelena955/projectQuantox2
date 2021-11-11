@@ -10,7 +10,9 @@
                     <li class="nav-item @if(request()->routeIs($link->link)) active @endif">
                         <a class="nav-link" href="{{'/user/'.$link->link}}">{{ $link->namenav }}</a>
                     </li>
+
                 @endforeach
+                    <li class="nav-item " ><a class="nav-link" style="color: #198754" href="/user/profile/logout">Logout</a></li>
             </ul>
         </div>
     </div>
