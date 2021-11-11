@@ -27,7 +27,7 @@
     <h1>Add client</h1>
     <div class="container" style="margin-top: 25px">
 
-    <form action="/add" method="post">
+    <form action="/user/clients/do-add" method="post">
         <fieldset >
             <legend>Add new client</legend>
             <div class="mb-4" id="maile">

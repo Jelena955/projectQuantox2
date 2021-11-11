@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Firm
 {
     use HasFactory;
+    //use SoftDeletes;
     protected $table='clients';
 
     public function firm()
@@ -19,6 +20,8 @@ class Client extends Firm
     {
         return $this->belongsTo(Registred::class, 'idregistred');
     }
+
+
 
 
 }

@@ -27,9 +27,9 @@
 
     <nav class="nav nav-pills justify-content-around" style="padding-top: 50px; padding-bottom:50px">
 
-        <h4 class="nav-link">Clients</h4 >
+        <h4 class="nav-link" style="color: #198754">Clients</h4 >
 
-        <a class="nav-link active" style="margin-left: 10px" aria-current="page" href="/user/clients/add">Add new client +</a>
+        <a class="nav-link active" style="margin-left: 10px; background-color: #198754" aria-current="page" href="/user/clients/add">Add new client +</a>
     </nav>
 
     </div>
@@ -43,26 +43,50 @@
             <th scope="col">Mail</th>
             <th scope="col">Pib</th>
             <th scope="col">Id number</th>
+            <th scope="col">Account number</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </tr>
         </thead>
-        <tbody>
+
         <tr>
    @foreach($firms as $firmarray)
        @foreach($firmarray as $firm)
 
             <th scope="row"></th>
-            <td>{{$firm->name}}</td>
-            <td>{{$firm->adress}}</td>
-            <td>{{$firm->mail}}</td>
-            <td>{{$firm->pib}}</td>
-            <td>{{$firm->idnumber}}</td>
+                    <form method="post" action="{{ route("user.clients.update", ['id' => $firm->id]) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <td><input style="border: #198754" type="text" name="name" id="name" value="{{$firm->name}}"></td>
+            <td><input type="text" name="street" value="{{$firm->adress}}"></td>
+            <td><input type="text" name="mail" value="{{$firm->mail}}"></td>
+            <td><input type="text" name="pib" value="{{$firm->pib}}"></td>
+            <td><input type="text" name="idnumber" value="{{$firm->idnumber}}"></td>
+                    <td><input type="text" name="accountnumber" value="{{$firm->accountnumber}}"></td>
+                    <td><button type="submit" name="edit" value="{{$firm->id}}" class="btn btn-success">Edit</button></td>
+
+
+                    </form>
+                    <td><a href="{{ route("user.clients.delete", ['id' => $firm->id]) }}"><button type="submit" name="delete" value="{{$firm->id}}" class="btn btn-danger" >Delete</button></a></td>
+
         </tr>
+
         @endforeach
 
         @endforeach
 
         </tbody>
     </table>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 
 @endsection
 

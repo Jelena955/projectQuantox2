@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\FirmController;
 use \App\Http\Controllers\ClientsController;
+use \App\Http\Controllers\ProbaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +29,11 @@ Route::get('/login', function (){
 //Route::group(['middleware' => 'user'], function() {
 Route::get('/user/profile', [FirmController::class, 'user'])->name('profile');
 Route::get('/user/clients', [ClientsController::class, 'clients'])->name('clients');
-Route::get('/user/clients', [ClientsController::class, 'show'])->name('clients');
+Route::get('/user/clients', [ClientsController::class, 'show'])->name('clientsshow');
 Route::get('/user/clients/add', [ClientsController::class, 'addclient'])->name('addclients');
-Route::post('/add', [ClientsController::class, 'store'])->name('addclients');
-
+Route::post('/user/clients/do-add', [ClientsController::class, 'store'])->name('doaddclients');
+Route::get("/user/clients/{id}/delete", [ClientsController::class, 'destroy'])->name("user.clients.delete");
+Route::post("/user/clients/{id}/update", [FirmController::class, 'update'])->name("user.clients.update");
 //});
 
 

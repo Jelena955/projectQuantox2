@@ -26,6 +26,8 @@ class ClientsController extends BaseController
         return view('pages.user.addclient', $this->data);
     }
 
+
+
     public function show(Request $request)
     {
         $result = $request->session()->get('user');
@@ -70,14 +72,45 @@ class ClientsController extends BaseController
         $firm->adress = $street . ' ' . $city;
         $firm->name = $name;
         $firm->save();
-        //$firmid=$firm->id;
-        // dd($firmid);
         $session=session()->get('user');
        // dd( $session=session()->get('user'));
-
         $client=new Client();
         $client->idfirm=$firm->id;
         $client->idregitred=$session[0]->idregistred;
         $client->save();
+       // dd($client->save());
+        if($firm->save()&& $client->save()){
+
+            return redirect()->route('clientsshow');
+        }
+
+        else{
+            echo 'You are not add client,';
+        }
+
     }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function destroy($id){
+        $model=new Client();
+
+        try {
+           Client::where('idfirm', $id)->delete();
+            return redirect()->back()->with("success", "Post successfully deleted!");
+        } catch (\Exception $e)
+        {
+            \Log::error($e->getMessage());
+            return redirect()->back()->with("error", "An error occurred, please try again later");
+        }
+    }
+
+
+
+
+
 }
