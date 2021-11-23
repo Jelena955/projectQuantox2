@@ -32,5 +32,10 @@ class Registred extends Firm
         return $this->hasMany(Client::class, 'idregitred');
     }
 
+    public function invoice(){
+
+        return $this->hasMany(Registred::class,'id');
+    }
+
 
 }

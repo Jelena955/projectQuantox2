@@ -9,4 +9,6 @@ class OneArticleInvoice extends Model
 {
     use HasFactory;
     protected $table='one_article_invoices';
+
+
 }

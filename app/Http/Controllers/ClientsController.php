@@ -7,6 +7,9 @@ use App\Models\Client;
 use App\Models\Firm;
 use App\Models\Registred;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\InvoicesController;
+use Illuminate\Support\Facades\Route;
 
 class ClientsController extends BaseController
 {
@@ -42,7 +45,17 @@ class ClientsController extends BaseController
             array_push($this->firms, $firmshow);
         }
         $this->data['firms'] = $this->firms;
-        return view('pages.user.clients', $this->data);
+        if(Route::currentRouteName()=='invoices'||Route::currentRouteName()=='invoice'){
+            return redirect()->route('invoice')->with(['data' => $this->firms]);
+
+        }
+        else{
+            return view('pages.user.clients', $this->data);
+
+        }
+
+
+
     }
 
     public function store(ClientRequest $request)

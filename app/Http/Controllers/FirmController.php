@@ -34,8 +34,6 @@ class FirmController extends BaseController
             $field=$request->input('FieldsetCheck');
         }
 
-
-
        $firm=new Firm();
         $firm->mail=$mail;
         $firm->name=$name;
@@ -101,7 +99,6 @@ public function user(){
             "pib" => "required|min:9|max:9",
             "idnumber" => "required|min:8|max:8",
             "accountnumber" => "required|min:8|max:12",
-
             "street" => 'required'
         ]);
 
