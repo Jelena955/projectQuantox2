@@ -41,7 +41,7 @@ Route::get('/user/invoices', [InvoicesController::class, 'show'])->name('invoice
     Route::get('/user/invoices/add', [ClientsController::class, 'show'])->name('invoices');
   // Route::post('/user/invoices/add', [InvoicesController::class, 'addinvoice'])->name('addinvoices');
     Route::get( '/user/invoices/addinvoice', [InvoicesController::class, 'addinvoice'])->name('invoice');
-
+    Route::post( '/user/invoices/do-add', [InvoicesController::class, 'doAdd'])->name('adddinvoice');
    // Route::post('/user/invoices/do-add', [InvoicesController::class, 'store'])->name('doaddclients');
 Route::get("/user/profile/logout", [FirmController::class, 'logout'])->name("logout");
 });

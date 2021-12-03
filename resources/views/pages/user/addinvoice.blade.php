@@ -28,18 +28,20 @@
     <div class="container" style="margin-top: 25px">
 
         <form action="/user/invoices/do-add" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <fieldset >
                 <legend>Add new invoice</legend>
                 <div class="mb-4" id="dateissuee">
                     <label for="Client" class="form-label">Client</label>
                     <select class="form-select" aria-label="Default select example" id="client" name="client">
                         <option value="choose" selected>Choose client</option>
-                    @foreach($firms as $firmarray)
+                        @foreach($firms as $firmarray)
                             @foreach($firmarray as $firm)
-                        <option value="{{$firm->idfirm}}">{{$firm->name}}</option>
+                                <option value='{{$firm->id}}'>{{$firm->name}}</option>
 
-                    @endforeach
+                            @endforeach
                         @endforeach
+
                     </select>
                 </div>
                 <div class="mb-4" id="dateissuee">
@@ -47,7 +49,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                     <label for="Mail" class="form-label">Date of issue</label>
-                    <input type="email" id="mail" name="dateissue"  class="form-control" placeholder="Date of issue (e.g. 2021-12-15">
+                    <input type="text" id="dateissue" name="dateissue"  class="form-control" placeholder="Date of issue (e.g. 2021-12-15">
                 </div>
                 <div class="mb-4" id="datedue">
                     <label for="name" class="form-label">Due date</label>
@@ -57,38 +59,34 @@
                 <hr/>
                 <div class="mb-4" class="article" id="article">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" id="name1" name="name" class="form-control" placeholder="Name">
+                    <input type="text" id="name" name="name[]" class="form-control" placeholder="Name">
                     <label for="description" class="form-label">Name</label>
-                    <input type="text" id="description1" name="description" class="form-control" placeholder="description">
+                    <input type="text" id="description1" name="description[]" class="form-control" placeholder="description">
                     <label for="quantity" class="form-label">Discount</label>
-                    <input type="text" id="quantity1" name="quantity" class="form-control" placeholder="quantity">
+                    <input type="text" id="quantity1" name="quantity[]" class="form-control" placeholder="quantity">
                     <label for="Price" class="form-label">Price</label>
-                    <input type="text" id="price1" name="price" class="form-control" placeholder="price">
+                    <input type="text" id="price1" name="price[]" class="form-control" placeholder="price">
                     <label for="Discount" class="form-label">Discount</label>
-                    <input type="text" id="discount1" name="discount" class="form-control" placeholder="Discount">
+                    <input type="text" id="discount1" name="discount[]" class="form-control" placeholder="Discount">
                     <label for="Itemtax" class="form-label">Item tax</label>
-                    <input type="text" id="itemtax1" name="itemtax" class="form-control" placeholder="Item taxt">
+                    <input type="text" id="itemtax1" name="itemTax[]" class="form-control" placeholder="Item taxt">
                 </div>
                 </div>
                 <button id="morearticle">Add one more article</button>
-                <div class="mb-4" id="idnumbere">
-                    <label for="Idnumber" class="form-label">Id number</label>
-                    <input type="text" id="idnumber" name="idnumber" class="form-control" placeholder="Id number (8 digits)">
-                </div>
-                <div class="mb-4" id="accountnumbere">
-                    <label for="account" class="form-label">Account number</label>
-                    <input type="text" id="accountnumber" name="accountnumber" class="form-control" placeholder="Account number (8-12 digits)">
+                <div class="mb-4" id="invTax">
+                    <label for="invTax" class="form-label">Invoice tax</label>
+                    <input type="text" id="invTax" name="invTax" class="form-control" placeholder="Invoice tax">
                 </div>
 
-                <div class="mb-3" id="citye">
-                    <label for="disabledSelect" class="form-label">Disabled select menu</label>
-                    <select id="city" name="city" class="form-select">
+                <div class="mb-3" id="paid">
+                    <label for="paid" class="form-label">Paid</label>
+                    <input type="text" id="paid" name="paid" class="form-control" placeholder="Paid">
 
-                    </select>
+
                 </div>
-                <div class="mb-4" id="streete">
-                    <label for="Street" class="form-label">Street</label>
-                    <input type="text" id="street" class="form-control"  name="street" placeholder="Street (e.g. 5218 Jensen Freeway )">
+                <div class="mb-4" id="notes">
+                    <label for="Street" class="form-label">Note</label>
+                    <input type="text" id="notes" class="form-control"  name="notes" placeholder="Note">
                 </div>
 
                 <button id="addinvoice"  class="btn btn-primary">Submit</button>

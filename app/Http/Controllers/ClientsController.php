@@ -39,8 +39,8 @@ class ClientsController extends BaseController
 
         foreach ($idfirm as $firm) {
 
-            $firmmodel = new Firm();
-            $firmmodel->idf = $firm->idfirm;
+            $firmmodel = new Client();
+            $firmmodel->idf = $firm->id;
             $firmshow = $firmmodel->show();
             array_push($this->firms, $firmshow);
         }

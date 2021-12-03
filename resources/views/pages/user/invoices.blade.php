@@ -39,7 +39,7 @@
         <h1>Search</h1>
         <tr>
 
-            <th scope="col">Id invoice</th>
+
             <th scope="col">Client</th>
             <th scope="col">Date of issue</th>
             <th scope="col">Due date</th>
@@ -56,9 +56,10 @@
                 @foreach($invoicesarray as $invoice)
 
 
+
                     <form method="post" action="{{ route("user.clients.update", ['id' => $invoice->id]) }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                        <td><input style="border: #198754" type="text" name="idinvoice" id="idinvoice" value="{{$invoice->id}}"></td>
+
                         <td><input type="text" name="client" value="{{$invoice->name}}"></td>
                         <td><input type="text" name="dateissue" value="{{$invoice->dateOfIssue}}"></td>
                         <td><input type="text" name="duedate" value="{{$invoice->DueDate}}"></td>
